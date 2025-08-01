@@ -1,25 +1,39 @@
-import { useState } from 'react'
 import './App.css'
-// import { useStorageListener } from '@/components/storageListener'
-import { useListListener } from '@/components/useListListener'
-import { translatePostHandler } from '@/components/hideFunctions/translatePostHandler/translatePost'
+import { storageChangeListener } from '../handlers/storageChangeListener';
+import { injectCustomElement } from '@/components/content-comps/accountNoteHandler/accountNoteHandler';
+
+// import { useEffect } from 'react';
+// import { getUserInfo } from '../handlers/getUserInfo/getUserInfo';
 
 function App() {
-  const [show, setShow] = useState(false)
-  const toggle = () => setShow(!show)
-  // useStorageListener()
-  useListListener()
-  translatePostHandler()
+
+  storageChangeListener()
+  // useEffect(() => {
+  //   const observer = new MutationObserver(() => {
+  //     const noteElement = document.getElementById('accountNote');
+  //     if (noteElement) {
+  //       const handleClick = () => {
+  //         noteElement.contentEditable = 'true';
+  //         noteElement.focus();
+  //         const user = getUserInfo()
+  //         noteElement.onchange = (e) => chrome.storage.local.set({ notes: { ...user, note: (e.target as HTMLElement).textContent } })
+  //         console.log('clicked');
+  //       };
+  //       noteElement.addEventListener('click', handleClick);
+  //       observer.disconnect(); // Stop observing once element is found
+  //       return () => noteElement.removeEventListener('click', handleClick);
+  //     }
+  //   });
+
+  //   observer.observe(document.body, { childList: true, subtree: true });
+
+  //   return () => observer.disconnect();
+  // }, []); // Empty dependency array to run once on mount
+
+  injectCustomElement();
+
   return (
-    <div className="popup-container">
-      {show && (
-        <div className={`popup-content ${show ? 'opacity-100' : 'opacity-0'}`}>
-          <h1>HELLO You</h1>
-        </div>
-      )}
-      <button className="toggle-button" onClick={toggle}>
-        test
-      </button>
+    <div>
     </div>
   )
 }

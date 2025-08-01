@@ -1,28 +1,8 @@
 import { useEffect, useState } from "react"
 import { MinimalInterface } from "./minimalInterface/minimalInterface"
 import { AddTools } from "./addTools/addTools"
-// import { HideNotificantionsForNewTweetsHandler } from "./handlers/HideNotificantionsForNewTweetsHandler"
 import { FeatureListTypes, list } from "@/assets/lists/featuresList"
 
-
-// const functionsHandlers: Record<string, () => void> = {
-//     translate_button: () => { },
-//     accounts_note: () => { },
-//     delete_button_for_your_tweets: () => { },
-//     hide_tweet_ads: () => { },
-//     hide_title_notification: () => { },
-//     hide_notifications: () => { },
-//     hide_notifications_number: () => { },
-//     hide_liked_notifications: () => { },
-//     hide_messages: () => { },
-//     hide_trends: () => { },
-//     hide_search_bar: () => { },
-//     hide_messages_sidebar: () => { },
-//     hide_people_you_may_know: () => { },
-//     hide_notification_for_new_tweets: () => {        
-//         HideNotificantionsForNewTweetsHandler()
-//     },
-// }
 export const CheckList = () => {
     const [data, setData] = useState<FeatureListTypes[]>(list)
 

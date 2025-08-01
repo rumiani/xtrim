@@ -1,12 +1,14 @@
-import { isPersian } from '@/components/hideFunctions/translatePostHandler/handlers/isPersian';
 import ReactDOM from 'react-dom/client';
-import { TranslateButton } from './translateButton/TranslateButton';
-import { bodyChangesObserver } from '@/handlers/bodyChangesObserver';
-import { optionPermisionHandler } from '@/handlers/optionPermisionHandler';
+import { TranslateButton } from '../translateButton/TranslateButton';
+import { optionPermisionHandler } from '@/content/handlers/others/optionPermisionHandler';
+import { bodyChangesObserver } from '@/content/handlers/others/bodyChangesObserver';
+import { isPersian } from '../handlers/isPersian';
 
 
 // Main function to observe posts and inject buttons
-export const translatePostHandler = async () => {
+export const translatePostHandler = async (status:boolean) => {
+    console.log(status);
+    
     if (!await optionPermisionHandler("translate_button")) {
         const translateBtnContainers = document.querySelectorAll('.translate-btn-container');
         translateBtnContainers.forEach(container => container.remove())

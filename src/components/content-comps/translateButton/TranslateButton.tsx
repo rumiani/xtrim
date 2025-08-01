@@ -1,5 +1,5 @@
-import { translateToPersian } from "@/components/hideFunctions/translatePostHandler/handlers/translateToPersian";
 import React from "react";
+import { translateToPersian } from "../handlers/translateToPersian";
 
 export const TranslateButton:React.FC<{ text: string }> = ({ text }: { text: string }) => {
     const [translating, setTranslating] = React.useState(false);
