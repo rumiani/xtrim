@@ -22,6 +22,8 @@ export default defineManifest({
   content_scripts: [{
     js: ['src/content/main.tsx'],
     matches: ["https://x.com/*"],
+    run_at: "document_idle"
+
   }],
   background: {
     service_worker: "src/background.ts",
