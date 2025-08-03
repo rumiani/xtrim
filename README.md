@@ -18,26 +18,26 @@ This extension lets you change the way X looks and works by adding custom functi
 ## ⚙️ Installation
 
 1. **Clone this repository:**
-   \`\`\`bash
-   git clone https://github.com/yourusername/xtrim.git
+   ```bash
+   git clone https://github.com/rumiani/xtrim.git
    cd xtrim
-   \`\`\`
+   ```
 
 2. **Install the dependencies:**
-   \`\`\`bash
+   ```bash
    npm install
-   \`\`\`
+   ```
 
 3. **Build the extension:**
-   \`\`\`bash
+   ```bash
    npm run build
-   \`\`\`
+   ```
 
 4. **Load the extension into Chrome:**
-   - Go to \`chrome://extensions/\`
+   - Go to `chrome://extensions/`
    - Enable **Developer mode** in the top right corner
    - Click on **Load unpacked**
-   - Select the \`dist/\` directory where your extension is built
+   - Select the `dist/` directory where your extension is built
 
 ---
 
@@ -46,19 +46,19 @@ This extension lets you change the way X looks and works by adding custom functi
 If you'd like to contribute or modify the extension during development, follow these steps:
 
 1. **Install dependencies** (if you haven't already):
-   \`\`\`bash
+   ```bash
    npm install
-   \`\`\`
+   ```
 
 2. **Start the development server:**
-   \`\`\`bash
+   ```bash
    npm run dev
-   \`\`\`
+   ```
    
    This will start Vite's development server, and you'll be able to see live updates as you modify the code.
 
 3. **To test the extension:**
-   - Go to \`chrome://extensions/\`
+   - Go to `chrome://extensions/`
    - Click **Reload** next to your extension (in developer mode)
 
 ---
@@ -67,8 +67,8 @@ If you'd like to contribute or modify the extension during development, follow t
 
 The extension is built with Vite and React, and you can modify its functionality through the following:
 
-- \`src/content.ts\`: Modify the DOM and manipulate X's page elements.
-- \`src/popup/\`: Edit UI components for your popup, if you have any.
+- `src/content.ts`: Modify the DOM and manipulate X's page elements.
+- `src/popup/`: Edit UI components for your popup, if you have any.
 
 ---
 
@@ -85,13 +85,13 @@ You can save custom preferences and settings in:
 
 **Example:**
 
-\`\`\`javascript
+```javascript
 // Saving to chrome.storage.local
 chrome.storage.local.set({ data: exampleData })
 
 // Retrieving from chrome.storage.local
 chrome.storage.local.get(['data'])
-\`\`\`
+```
 
 ---
 
