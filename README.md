@@ -14,8 +14,19 @@ This extension lets you change the way X looks and works by adding custom functi
 - **Works on X**: Specifically built to interact with [X](https://X.com).
 
 ---
-
 ## ⚙️ Installation
+
+## 🧑‍💻 How to Install (for non-programmers)
+
+1. [Download the latest release](https://github.com/rumiani/xtrim/releases)
+2. **Unzip** the downloaded `.zip` file
+3. Open Chrome and go to `chrome://extensions/`
+4. Turn on **Developer mode** (top-right)
+5. Click **“Load unpacked”**
+6. Select the **unzipped `release` folder**
+7. Done! 🎉
+
+## 🧑‍💻 How to Install (for programmers)
 
 1. **Clone this repository:**
    ```bash
@@ -34,6 +45,8 @@ This extension lets you change the way X looks and works by adding custom functi
    ```
 
 4. **Load the extension into Chrome:**
+   - Download the latest release
+   - unzip the file
    - Go to `chrome://extensions/`
    - Enable **Developer mode** in the top right corner
    - Click on **Load unpacked**
@@ -63,13 +76,6 @@ If you'd like to contribute or modify the extension during development, follow t
 
 ---
 
-## 🔧 Configuration
-
-The extension is built with Vite and React, and you can modify its functionality through the following:
-
-- `src/content.ts`: Modify the DOM and manipulate X's page elements.
-- `src/popup/`: Edit UI components for your popup, if you have any.
-
 ---
 
 ## 📝 Manifest
@@ -95,13 +101,6 @@ chrome.storage.local.get(['data'])
 
 ---
 
-## 🧑‍💻 Contributing
-
-1. Fork this repository.
-2. Create a branch for your feature or bug fix.
-3. Make changes and test thoroughly.
-4. Submit a pull request.
-
 ---
 
 ## 📄 License
@@ -110,7 +109,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ---
 
-## 👨‍💻 Built With
+## 👨‍💻 Built With [CRXJS](https://crxjs.dev/)
 
 - React
 - Vite

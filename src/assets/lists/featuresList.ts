@@ -15,13 +15,13 @@ export const list: FeatureListTypes[] = [
         status: true,
         description: "Adds post translation to Persian",
     },
-    {
-        category: "tools",
-        label: "Profile note",
-        value: "profile_note",
-        status: true,
-        description: "Custom profile notes",
-    },
+    // {
+    //     category: "tools",
+    //     label: "Profile note",
+    //     value: "profile_note",
+    //     status: true,
+    //     description: "Custom profile notes",
+    // },
     {
         category: "tools",
         label: "Delete button for your posts",
