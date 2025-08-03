@@ -1,12 +1,8 @@
+import { hideElementHandler } from "@/content/handlers/hideElementHandler/hideElementHandler";
 import { bodyChangesObserver } from "@/content/handlers/others/bodyChangesObserver";
 
 export const otherThingsHnadler = (status: boolean) => {
-    const hideOtherThings = () => {
-        const inviteToSupscribeDiv = document.querySelector('div[aria-label="Trending"]') as HTMLDivElement | null;
-        if (inviteToSupscribeDiv) {
-            inviteToSupscribeDiv.style.display = status ? 'none' : '';
-        }
-    }
+    const hideOtherThings = () => hideElementHandler('div[aria-label="Trending"]', status)
     hideOtherThings()
     bodyChangesObserver(hideOtherThings)
 }

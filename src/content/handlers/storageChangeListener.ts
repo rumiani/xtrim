@@ -3,8 +3,6 @@ import { runTheListObjectFunction } from "@/content/handlers/runTheListObjectFun
 import { theDifferentObjetHandler } from "./others/theDifferentObjetHandler";
 
 export const storageChangeListener = () => {
-    console.log("storageChangeListener");
-
     const handleStorageChange = (changes: any, namespace: string) => {
         if (namespace === 'local' && changes.list) {
             const { newValue, oldValue } = changes.list

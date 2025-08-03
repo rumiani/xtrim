@@ -1,22 +1,17 @@
 import ReactDOM from 'react-dom/client';
 import { TranslateButton } from '../translateButton/TranslateButton';
-import { optionPermisionHandler } from '@/content/handlers/others/optionPermisionHandler';
+// import { optionPermisionHandler } from '@/content/handlers/others/optionPermisionHandler';
 import { bodyChangesObserver } from '@/content/handlers/others/bodyChangesObserver';
 import { isPersian } from '../handlers/isPersian';
 
 
 // Main function to observe posts and inject buttons
-export const translatePostHandler = async (status:boolean) => {
-    console.log(status);
-    
-    if (!await optionPermisionHandler("translate_button")) {
-        const translateBtnContainers = document.querySelectorAll('.translate-btn-container');
-        translateBtnContainers.forEach(container => container.remove())
-        return
-    }
+export const translatePostHandler = async (status: boolean) => {
 
     async function addTranslateButtons() {
-        if (!await optionPermisionHandler("translate_button")) return
+        if (!status)
+            return document.querySelectorAll('.translate-btn-container').forEach(container => container.remove())
+
         // get the text from the post
         const posts = document.querySelectorAll('[data-testid="tweet"]');
         posts.forEach((tweet) => {

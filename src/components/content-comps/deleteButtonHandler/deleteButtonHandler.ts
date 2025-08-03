@@ -2,15 +2,15 @@ import { getUserInfo } from "@/content/handlers/getUserInfo/getUserInfo";
 import { bodyChangesObserver } from "@/content/handlers/others/bodyChangesObserver";
 
 export const deleteButtonHandler = (status: boolean) => {
-
     // Function to check if user info is loaded and add delete buttons
     function checkUserAndAddButtons() {
         const user = getUserInfo();
-        if (!status || !user?.username) {
-            return; // Exit if user info isn't ready yet
-        }
+        if (!user?.username) return; // Exit if user info isn't ready yet
 
         function addDeleteButtons() {
+            if (!status) 
+                return document.querySelectorAll('.custom-delete-button').forEach(container => container.remove())
+
             const posts = document.querySelectorAll('article[role="article"]') as NodeListOf<HTMLElement>;
             posts.forEach((post) => {
                 if (post.querySelector('.custom-delete-button')) return;

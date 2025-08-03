@@ -11,7 +11,7 @@ export const injectCustomElement = () => {
         // 1. Create the new div
         const customDiv = document.createElement('div');
         customDiv.id = CUSTOM_DIV_ID;
-        customDiv.style.cssText = 'block !important; width:100% !important;';
+        customDiv.style.cssText = 'display:block !important; width:100% !important;';
         customDiv.textContent = 'My Custom One-Liner 👋';
 
         // 2. Prepend it to the navigation bar

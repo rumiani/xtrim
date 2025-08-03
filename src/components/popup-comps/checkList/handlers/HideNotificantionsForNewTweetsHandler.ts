@@ -1,6 +1,4 @@
-export const HideNotificantionsForNewTweetsHandler = () => {
-    console.log("runing ...");
-    
+export const HideNotificantionsForNewTweetsHandler = () => {    
     const cellDivs = document.querySelectorAll('div[data-testid="cellInnerDiv"]');
     cellDivs.forEach(div => {
         // Find the span with text starting with "Show" (case-insensitive)

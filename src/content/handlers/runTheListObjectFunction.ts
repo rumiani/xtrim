@@ -3,24 +3,26 @@ import { FeatureListTypes } from "@/assets/lists/featuresList";
 import { deleteButtonHandler } from "@/components/content-comps/deleteButtonHandler/deleteButtonHandler";
 import { hideNewPostsNotificationHandler } from "@/components/content-comps/hideFunctions/hideNewPostsNotificationHandler/hideNewPostsNotificationHandler";
 import { hideTrendsHandler } from "@/components/content-comps/hideFunctions/hideTrendsHandler/hideTrendsHandler";
-import { hideSearchBarHandler } from "@/components/content-comps/hideFunctions/hideSearchBarHandler/hideSearchBarHandler";
 import { hidePeopleYouMayKkowHandler } from "@/components/content-comps/hideFunctions/hidePeopleYouMayKkowHandler/hidePeopleYouMayKkowHandler";
 import { translatePostHandler } from "@/components/content-comps/translatePostHandler/translatePost";
 import { hideAdsHandler } from "@/components/content-comps/hideFunctions/hideAdsHandler/hideAdsHandler";
 import { hideNotificationsHandler } from "@/components/content-comps/hideFunctions/hideNotificationsHandler/hideNotificationsHandler";
 import { hideMessagesHandler } from "@/components/content-comps/hideFunctions/hideMessagesHandler/hideMessagesHandler";
-import { hideMessagesSidebarHandler } from "@/components/content-comps/hideFunctions/hideMessagesSidebarHandler/hideMessagesSidebarHandler";
 import { hideNotificationNumberHandler } from "@/components/content-comps/hideFunctions/hideNotificationNumberHandler/hideNotificationNumberHandler";
 import { otherThingsHnadler } from "@/components/content-comps/hideFunctions/otherThingsHandler/otherThingsHandler";
+import { hideQoutedInqoutesPageHandler } from "@/components/content-comps/hideFunctions/hideQoutedInqoutesPage/hideQoutedInqoutesPage";
+import { hideLikedNotifictationsHandler } from "@/components/content-comps/hideFunctions/hideLikedNotifictationsHandler/hideLikedNotifictationsHandler";
+import { hideGrokHandler } from "@/components/content-comps/hideFunctions/hideGrokHandler/hideGrokHandler";
+import { hidePremiumHandler } from "@/components/content-comps/hideFunctions/hidePremiumHandler/hidePremiumHandler";
+import { hideSearchHandler } from "@/components/content-comps/hideFunctions/hideSearchHandler/hideSearchHandler";
+import { hideTweetEngagementHandler } from "@/components/content-comps/hideFunctions/hideTweetEngagementHandler/hideTweetEngagementHandler";
 
 export const runTheListObjectFunction = (object: FeatureListTypes) => {
-    console.log("runTheListObjectFunction")
     const functionsObject: { [key: string]: (status: boolean) => void } = {
         translate_button: (status) => {
             translatePostHandler(status)
         },
-        profile_note: (status) => {
-            console.log(status);
+        profile_note: () => {
             // accountNoteHandler(status)
         },
         delete_button_for_your_posts: (status) => {
@@ -46,11 +48,8 @@ export const runTheListObjectFunction = (object: FeatureListTypes) => {
         hide_trends: (status) => {
             hideTrendsHandler(status)
         },
-        hide_search_bar: (status) => {
-            hideSearchBarHandler(status)
-        },
-        hide_messages_sidebar: (status) => {
-            hideMessagesSidebarHandler(status)
+        hide_search: (status) => {
+            hideSearchHandler(status)
         },
         hide_people_you_may_know: (status) => {
             hidePeopleYouMayKkowHandler(status)
@@ -60,6 +59,21 @@ export const runTheListObjectFunction = (object: FeatureListTypes) => {
         },
         other_things: (status) => {
             otherThingsHnadler(status)
+        },
+        hide_qouted_inqoutes_page: (status) => {
+            hideQoutedInqoutesPageHandler(status)
+        },
+        hide_liked_notifictations: (status) => {
+            hideLikedNotifictationsHandler(status)
+        },
+        hide_grok: (status) => {
+            hideGrokHandler(status)
+        },
+        hide_premium: (status) => {
+            hidePremiumHandler(status)
+        },
+        hide_tweet_engagement: (status) => {
+            hideTweetEngagementHandler(status)
         }
     }
 

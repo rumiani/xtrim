@@ -1,5 +1,5 @@
 export interface FeatureListTypes {
-    category: string,
+    category: "tools" | "hideElements",
     label: string,
     value: string,
     status: boolean
@@ -81,17 +81,10 @@ export const list: FeatureListTypes[] = [
     },
     {
         category: "hideElements",
-        label: "Hide search bar",
-        value: "hide_search_bar",
+        label: "Hide search",
+        value: "hide_search",
         status: true,
-        description: "Conceals search bar",
-    },
-    {
-        category: "hideElements",
-        label: "Hide messages sidebar",
-        value: "hide_messages_sidebar",
-        status: true,
-        description: "Hides messages sidebar",
+        description: "Conceals search",
     },
     {
         category: "hideElements",
@@ -113,5 +106,40 @@ export const list: FeatureListTypes[] = [
         value: "other_things",
         status: true,
         description: "other things on the screen",
+    },
+    {
+        category: "hideElements",
+        label: "Hide qouted inqoutes page",
+        value: "hide_qouted_inqoutes_page",
+        status: true,
+        description: "Hides qouted tweets in qoutes page",
+    },{
+        category: "hideElements",
+        label: "Hide liked notifictations",
+        value: "hide_liked_notifictations",
+        status: true,
+        description: "Hides liked notifictations",
+    },
+    {
+        category: "hideElements",
+        label: "Hide Grok",
+        value: "hide_grok",
+        status: true,
+        description: "Hides Grok",
+    },
+    {
+        category:"hideElements",
+        label:"Hide premium",
+        value:"hide_premium",
+        status:true,
+        description:"Hides premium"
+    },
+    {
+        category:"hideElements",
+        label:"hide tweet engagement",
+        value:"hide_tweet_engagement",
+        status:true,
+        description:"Hides tweet engagement"
     }
+
 ];
