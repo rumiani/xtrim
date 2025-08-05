@@ -22,7 +22,6 @@ export default function App() {
         toggleIsActive(activationResult.isActive)
         const listItemsResult = await chrome.storage.local.get(['list'])
         setListItems(listItemsResult.list)
-
       } catch (error) {
         console.error('Error loading settings:', error)
       }

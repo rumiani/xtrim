@@ -8,20 +8,22 @@ export const storageChangeListener = () => {
             const { newValue, oldValue } = changes.list
             const changedObject: FeatureListTypes | undefined = theDifferentObjetHandler(newValue, oldValue)
             if (changedObject) runTheListObjectFunction(changedObject)
-        } else if (namespace === 'local' && changes.settings) {
-            const { newValue } = changes.settings
-            if (newValue.isOn) {
-                console.log('extension is on');
+        } else if (namespace === 'local' && changes.isActive) {
+            const { newValue } = changes.isActive
+            console.log(newValue,"...................");
+            
+            if (newValue) 
                 loadInitialList()
-            }
         }
     }
 
     const loadInitialList = async () => {
         try {
             const result = await chrome.storage.local.get(['list'])
+            console.log(result.list);
+
             if (result.list !== undefined) {
-                result.list.forEach((object: FeatureListTypes) => {                    
+                result.list.forEach((object: FeatureListTypes) => {
                     runTheListObjectFunction(object)
                 })
             }

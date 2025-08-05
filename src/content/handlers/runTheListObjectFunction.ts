@@ -16,66 +16,72 @@ import { hidePremiumHandler } from "@/components/content-comps/hideFunctions/hid
 import { hideSearchHandler } from "@/components/content-comps/hideFunctions/hideSearchHandler/hideSearchHandler";
 import { hideTweetEngagementHandler } from "@/components/content-comps/hideFunctions/hideTweetEngagementHandler/hideTweetEngagementHandler";
 import { FeatureListTypes } from "@/stores/useListStore";
+import { list } from "@/assets/lists/featuresList";
+
+type FeatureValue = typeof list[number]['value']
+
+type FeatureValueHandlers = Record<FeatureValue, (status: boolean) => void>;
+
 
 export const runTheListObjectFunction = (object: FeatureListTypes) => {
-    const functionsObject: { [key: string]: (status: boolean) => void } = {
-        translate_button: (status) => {
+    const functionsObject: FeatureValueHandlers = {
+        translate_button: (status: boolean) => {
             translatePostHandler(status)
         },
         profile_note: () => {
             // accountNoteHandler(status)
         },
-        delete_button_for_your_posts: (status) => {            
+        delete_button_for_your_posts: (status: boolean) => {
             deleteButtonHandler(status)
         },
-        remove_post_ads: (status) => {
+        remove_post_ads: (status: boolean) => {
             hideAdsHandler(status)
         },
-        hide_title_notification: (status) => {
+        hide_title_notification: (status: boolean) => {
             clearTitleHandler(status)
         },
-        hide_notifications: (status) => {
+        hide_notifications: (status: boolean) => {
             hideNotificationsHandler(status)
         },
-        hide_notifications_number: (status) => {
+        hide_notifications_number: (status: boolean) => {
             hideNotificationNumberHandler(status)
         },
-        hide_liked_notifications: () => {
+        hide_liked_notifications: (status: boolean) => {
+            hideLikedNotifictationsHandler(status)
+
         },
-        hide_messages: (status) => {
+        hide_messages: (status: boolean) => {
             hideMessagesHandler(status)
         },
-        hide_trends: (status) => {
+        hide_trends: (status: boolean) => {
             hideTrendsHandler(status)
         },
-        hide_search: (status) => {
+        hide_search: (status: boolean) => {
             hideSearchHandler(status)
         },
-        hide_people_you_may_know: (status) => {
+        hide_people_you_may_know: (status: boolean) => {
             hidePeopleYouMayKkowHandler(status)
         },
-        hide_new_posts_notification: (status) => {
+        hide_new_posts_notification: (status: boolean) => {
             hideNewPostsNotificationHandler(status)
         },
-        other_things: (status) => {
+        other_things: (status: boolean) => {
             otherThingsHnadler(status)
         },
-        hide_qouted_inqoutes_page: (status) => {
+        hide_qouted_inqoutes_page: (status: boolean) => {
             hideQoutedInqoutesPageHandler(status)
         },
-        hide_liked_notifictations: (status) => {
-            hideLikedNotifictationsHandler(status)
-        },
-        hide_grok: (status) => {
+
+        hide_grok: (status: boolean) => {
             hideGrokHandler(status)
         },
-        hide_premium: (status) => {
+        hide_upsell: (status: boolean) => {
             hidePremiumHandler(status)
         },
-        hide_tweet_engagement: (status) => {
+        hide_tweet_engagement: (status: boolean) => {
             hideTweetEngagementHandler(status)
         }
     }
 
-    functionsObject[object.value](object.status)
+    functionsObject[object.value as FeatureValue](object.status)
 } 

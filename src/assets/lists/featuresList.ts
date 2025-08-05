@@ -1,6 +1,4 @@
-import { FeatureListTypes } from "@/stores/useListStore";
-
-export const list: FeatureListTypes[] = [
+export const list = [
     // tools
     {
         category: "tools",
@@ -9,13 +7,13 @@ export const list: FeatureListTypes[] = [
         status: false,
         description: "Adds post translation to Persian",
     },
-    // {
-    //     category: "tools",
-    //     label: "Profile note",
-    //     value: "profile_note",
-    //     status: false,
-    //     description: "Custom profile notes",
-    // },
+    {
+        category: "tools",
+        label: "Profile note",
+        value: "profile_note",
+        status: false,
+        description: "Custom profile notes",
+    },
     {
         category: "tools",
         label: "Delete button for your posts",
@@ -107,12 +105,6 @@ export const list: FeatureListTypes[] = [
         value: "hide_qouted_inqoutes_page",
         status: false,
         description: "Hides qouted tweets in qoutes page",
-    },{
-        category: "hideElements",
-        label: "Hide liked notifictations",
-        value: "hide_liked_notifictations",
-        status: false,
-        description: "Hides liked notifictations",
     },
     {
         category: "hideElements",
@@ -123,10 +115,10 @@ export const list: FeatureListTypes[] = [
     },
     {
         category:"hideElements",
-        label:"Hide premium",
-        value:"hide_premium",
+        label:"Hide upsell",
+        value:"hide_upsell",
         status:true,
-        description:"Hides premium"
+        description:"Hides upsell"
     },
     {
         category:"hideElements",
@@ -136,4 +128,4 @@ export const list: FeatureListTypes[] = [
         description:"Hides tweet engagement"
     }
 
-];
+] as const;

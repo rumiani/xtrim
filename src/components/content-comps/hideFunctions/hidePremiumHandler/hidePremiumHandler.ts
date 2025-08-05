@@ -4,8 +4,10 @@ import { bodyChangesObserver } from "@/content/handlers/others/bodyChangesObserv
 export const hidePremiumHandler = (status: boolean) => {
     const hidePremium = () => {
         hideElementHandler('a[href="/i/premium_sign_up"]', status)
-        hideElementHandler('div[data-testid="super-upsell-UpsellCardRenderProperties"]', status)
-        hideElementHandler('div[data-testid="verified_profile_visitor_upsell"]', status)
+        const upsellElements = document.querySelectorAll('[data-testid*="upsell"]');
+        upsellElements.forEach((el) => {
+            (el as HTMLElement).style.display = status ? 'none' : "";
+        });
     }
     hidePremium()
     bodyChangesObserver(hidePremium)

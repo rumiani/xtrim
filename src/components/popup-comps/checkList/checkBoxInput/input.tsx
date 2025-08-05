@@ -15,7 +15,7 @@ export default function CheckboxInput({
   const { isActive } = useActivationStore();
   return (
     <div className="rounded-lg transition-all duration-300">
-      <div className={`flex relative ${value !== "isActive" && !isActive && 'cursor-not-allowed! opacity-50'}`}>
+      <div className={`flex relative ${value !== "isActive" && !isActive && 'opacity-50'}`}>
         <input
           checked={status}
           onChange={() => handleInputChange()}
@@ -23,18 +23,17 @@ export default function CheckboxInput({
           id={value}
           name={value}
           disabled={value === "isActive" ? false : !isActive}
-          className={`cursor-pointer
+          className={`
 relative peer shrink-0 flex justify-center align-middle
 appearance-none w-5 h-5 border-2 border-gray-500 rounded-sm bg-white
 mt-1 mx-0
-checked:bg-blue-600 checked:border-0 `}
+checked:bg-blue-600 checked:border-0 ${value !== "isActive" && !isActive ? 'cursor-not-allowed' : 'cursor-pointer'}`}
         />
-        <label htmlFor={value} className={`w-fit ${status ? "text-black" : "text-gray-600"} ${!isActive && 'text-gray-400'}  cursor-pointer pl-2 pt-1 text-base`}>
+        <label htmlFor={value} className={`w-fit ${status ? "text-black" : "text-gray-600"} ${value !== "isActive" && !isActive ? 'text-gray-400 cursor-not-allowed' : 'cursor-pointer'}   pl-2 pt-1 text-base`}>
           {label}
         </label>
         <svg
           className="
-        cursor-pointer
 absolute 
 w-4 h-4 mt-[6px] ml-[2px]
 hidden peer-checked:block
