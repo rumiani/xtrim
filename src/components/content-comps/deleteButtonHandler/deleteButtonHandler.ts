@@ -4,7 +4,7 @@ import { bodyChangesObserver } from "@/content/handlers/others/bodyChangesObserv
 export const deleteButtonHandler = (status: boolean) => {
     // Function to check if user info is loaded and add delete buttons
     function checkUserAndAddButtons() {
-        const user = getUserInfo();
+        const user = getUserInfo();        
         if (!user?.username) return; // Exit if user info isn't ready yet
 
         function addDeleteButtons() {

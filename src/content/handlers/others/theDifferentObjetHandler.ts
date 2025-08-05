@@ -1,4 +1,4 @@
-import { FeatureListTypes } from "@/assets/lists/featuresList";
+import { FeatureListTypes } from "@/stores/useListStore";
 
 export const theDifferentObjetHandler: (newList: FeatureListTypes[],
     oldList: FeatureListTypes[]) => FeatureListTypes | undefined = (newList: FeatureListTypes[], oldList: FeatureListTypes[]) => {

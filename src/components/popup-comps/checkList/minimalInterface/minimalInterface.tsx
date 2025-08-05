@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react"
 import CheckboxInput from "../checkBoxInput/input"
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
-import { FeatureListTypes } from "@/assets/lists/featuresList";
+import useListStore, { FeatureListTypes } from "@/stores/useListStore";
 
-export const MinimalInterface = ({ handleInputChange, featuresList }: { handleInputChange: Function, featuresList: FeatureListTypes[] }) => {
+export const MinimalInterface = ({ handleInputChange }: { handleInputChange: Function }) => {
+    const { list } = useListStore();
     const [isHiddden, setIsHiddden] = useState(false)
     const [allSelected, setAllSelected] = useState(false)
-    const hideElementsArray = featuresList.filter((item: FeatureListTypes) => item.category === "hideElements")
+    const hideElementsArray = list.filter((item: FeatureListTypes) => item.category === "hideElements")
 
     useEffect(() => {
         const areAllSelected = hideElementsArray.every((item: any) => item.status)

@@ -1,3 +1,5 @@
+import useActivationStore from "@/stores/useActivationStore";
+
 interface checkBoxProps {
   value: string;
   label: string,
@@ -10,22 +12,24 @@ export default function CheckboxInput({
   status,
   handleInputChange,
 }: checkBoxProps) {
+  const { isActive } = useActivationStore();
   return (
     <div className="rounded-lg transition-all duration-300">
-      <div className="flex relative ">
+      <div className={`flex relative ${value !== "isActive" && !isActive && 'cursor-not-allowed! opacity-50'}`}>
         <input
           checked={status}
           onChange={() => handleInputChange()}
           type="checkbox"
           id={value}
           name={value}
+          disabled={value === "isActive" ? false : !isActive}
           className={`cursor-pointer
 relative peer shrink-0 flex justify-center align-middle
 appearance-none w-5 h-5 border-2 border-gray-500 rounded-sm bg-white
 mt-1 mx-0
-checked:bg-blue-600 checked:border-0`}
+checked:bg-blue-600 checked:border-0 `}
         />
-        <label htmlFor={value} className={`${status ? "text-black" : "text-gray-500"}  cursor-pointer pl-2 pt-1 text-base`}>
+        <label htmlFor={value} className={`w-fit ${status ? "text-black" : "text-gray-600"} ${!isActive && 'text-gray-400'}  cursor-pointer pl-2 pt-1 text-base`}>
           {label}
         </label>
         <svg

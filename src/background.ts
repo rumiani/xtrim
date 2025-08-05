@@ -7,24 +7,13 @@ chrome.runtime.onInstalled.addListener(async (details) => {
     console.log("Install reason:", details.reason) // 'install', 'update', 'chrome_update', etc.
 
     if (details.reason === 'install') {
-        chrome.tabs.create({ url: "https://x.com", active: true }, (tab) => {
-            if (tab.id === undefined) return; // Safety check
-            chrome.scripting.executeScript({
-                target: { tabId: tab.id }, // Now TypeScript is happy
-                func: () => {
-                    alert("🎉 Xtrim is active!\nPlease refresh x.com.");
-                }
-            });
-        });
-
-
-
+        console.log("Extension was installed!")
         try {
             await chrome.storage.local.set({ list })
+            await chrome.storage.local.set({ isActive: false })
         } catch {
             console.error('Error saving to storage:')
         }
-
 
         // Example: Set default storage values
         chrome.storage.local.set({

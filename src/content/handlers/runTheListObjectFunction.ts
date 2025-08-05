@@ -1,5 +1,4 @@
 import { clearTitleHandler } from "@/components/content-comps/hideFunctions/clearTitleHandler/clearTitleHandler";
-import { FeatureListTypes } from "@/assets/lists/featuresList";
 import { deleteButtonHandler } from "@/components/content-comps/deleteButtonHandler/deleteButtonHandler";
 import { hideNewPostsNotificationHandler } from "@/components/content-comps/hideFunctions/hideNewPostsNotificationHandler/hideNewPostsNotificationHandler";
 import { hideTrendsHandler } from "@/components/content-comps/hideFunctions/hideTrendsHandler/hideTrendsHandler";
@@ -16,6 +15,7 @@ import { hideGrokHandler } from "@/components/content-comps/hideFunctions/hideGr
 import { hidePremiumHandler } from "@/components/content-comps/hideFunctions/hidePremiumHandler/hidePremiumHandler";
 import { hideSearchHandler } from "@/components/content-comps/hideFunctions/hideSearchHandler/hideSearchHandler";
 import { hideTweetEngagementHandler } from "@/components/content-comps/hideFunctions/hideTweetEngagementHandler/hideTweetEngagementHandler";
+import { FeatureListTypes } from "@/stores/useListStore";
 
 export const runTheListObjectFunction = (object: FeatureListTypes) => {
     const functionsObject: { [key: string]: (status: boolean) => void } = {
@@ -25,7 +25,7 @@ export const runTheListObjectFunction = (object: FeatureListTypes) => {
         profile_note: () => {
             // accountNoteHandler(status)
         },
-        delete_button_for_your_posts: (status) => {
+        delete_button_for_your_posts: (status) => {            
             deleteButtonHandler(status)
         },
         remove_post_ads: (status) => {

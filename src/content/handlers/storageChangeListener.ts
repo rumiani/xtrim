@@ -1,6 +1,6 @@
-import { FeatureListTypes } from "@/assets/lists/featuresList";
 import { runTheListObjectFunction } from "@/content/handlers/runTheListObjectFunction";
 import { theDifferentObjetHandler } from "./others/theDifferentObjetHandler";
+import { FeatureListTypes } from "@/stores/useListStore";
 
 export const storageChangeListener = () => {
     const handleStorageChange = (changes: any, namespace: string) => {
@@ -8,6 +8,12 @@ export const storageChangeListener = () => {
             const { newValue, oldValue } = changes.list
             const changedObject: FeatureListTypes | undefined = theDifferentObjetHandler(newValue, oldValue)
             if (changedObject) runTheListObjectFunction(changedObject)
+        } else if (namespace === 'local' && changes.settings) {
+            const { newValue } = changes.settings
+            if (newValue.isOn) {
+                console.log('extension is on');
+                loadInitialList()
+            }
         }
     }
 
@@ -17,7 +23,7 @@ export const storageChangeListener = () => {
             if (result.list !== undefined) {
                 result.list.forEach((object: FeatureListTypes) => {                    
                     runTheListObjectFunction(object)
-                })  
+                })
             }
         } catch (error) {
             console.error('Error loading initial list:', error)
