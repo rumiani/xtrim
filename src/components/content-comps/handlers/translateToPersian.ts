@@ -10,6 +10,6 @@ export async function translateToPersian(text: string,lang:string): Promise<stri
     const translation = data[0].map((d: any) => d[0]).join('');
     return translation;
   } catch {
-    return '❌ ترجمه نشد';
+    return '❌';
   }
 }

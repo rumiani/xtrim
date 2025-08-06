@@ -1,7 +1,8 @@
 import React from "react";
 import { translateToPersian } from "../handlers/translateToPersian";
-import { SelectLangs } from "./langsSelect/langsSelect";
+// import { SelectLangs } from "./langsSelect/langsSelect";
 import useSettingsStore from "@/stores/useSettingsStore";
+import { MdOutlineTranslate } from "react-icons/md";
 
 export const TranslateButton: React.FC<{ text: string }> = ({ text }: { text: string }) => {
     const { lang } = useSettingsStore();
@@ -25,10 +26,10 @@ export const TranslateButton: React.FC<{ text: string }> = ({ text }: { text: st
             <div className="flex flex-row">
                 <button
                     onClick={handleTranslate}
-                    className="w-16! px-3! py-1! text-sm! bg-gray-900! text-blue-500 rounded-r-3xl! hover:bg-gray-900!">
-                    {translating ? '...' : 'ترجمه'}
+                    className="w-10 h-10 rounded-full bg-gray-400 hover:bg-gray-900!">
+                    {translating ? <p className="text-lg text-center">...</p> : <MdOutlineTranslate className="text-lg mx-auto" />}
                 </button>
-                <SelectLangs />
+                {/* <SelectLangs /> */}
             </div>
             {
                 result && (
