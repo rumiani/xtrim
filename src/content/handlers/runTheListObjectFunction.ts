@@ -17,6 +17,7 @@ import { hideSearchHandler } from "@/components/content-comps/hideFunctions/hide
 import { hideTweetEngagementHandler } from "@/components/content-comps/hideFunctions/hideTweetEngagementHandler/hideTweetEngagementHandler";
 import { FeatureListTypes } from "@/stores/useListStore";
 import { list } from "@/assets/lists/featuresList";
+import { profileNoteHandler } from "@/components/content-comps/accountNoteHandler/accountNoteHandler";
 
 type FeatureValue = typeof list[number]['value']
 
@@ -28,8 +29,8 @@ export const runTheListObjectFunction = (object: FeatureListTypes) => {
         translate_button: (status: boolean) => {
             translatePostHandler(status)
         },
-        profile_note: () => {
-            // accountNoteHandler(status)
+        profile_note: (status) => {
+            profileNoteHandler(status)
         },
         delete_button_for_your_posts: (status: boolean) => {
             deleteButtonHandler(status)

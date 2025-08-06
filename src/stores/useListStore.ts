@@ -17,7 +17,7 @@ export interface ListStore {
 }
 
 const useListStore = create<ListStore>((set, get) => ({
-    list,
+    list: [...list] as FeatureListTypes[],
     setListItems: (items) => set({ list: items }),
     setListItemStatus: (itemValue, status) =>
         set((state) => ({

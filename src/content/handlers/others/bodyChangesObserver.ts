@@ -1,13 +1,3 @@
-// export function bodyChangesObserver(callback: () => void) {
-//     const observer = new MutationObserver(callback);
-//     observer.observe(document.body, {
-//         childList: true,
-//         subtree: true,
-//     });
-//     callback(); // Initial call
-// }
-
-// bodyChangesObserver.ts
 const callbacks: Array<() => void> = [];
 let observer: MutationObserver | null = null;
 let lastRun = 0;
@@ -26,4 +16,6 @@ export function bodyChangesObserver(callback: () => void, targetNode: Node = doc
   
   callbacks.push(callback);
   callback();
+
+  return observer;
 }
