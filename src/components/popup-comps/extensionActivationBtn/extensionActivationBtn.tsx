@@ -1,10 +1,10 @@
 import CheckboxInput from "../checkList/checkBoxInput/input"
 import { refreshHandler } from "@/popup/handlers/refreshHandler";
-import useActivationStore from "@/stores/useActivationStore";
 import useListStore from "@/stores/useListStore";
+import useSettingsStore from "@/stores/useSettingsStore";
 
 export const ExtensionActivationBtn = () => {
-    const { isActive, toggleIsActive } = useActivationStore();
+    const { isActive, toggleIsActive } = useSettingsStore();
     const { setAllListItemStatus } = useListStore();
 
 

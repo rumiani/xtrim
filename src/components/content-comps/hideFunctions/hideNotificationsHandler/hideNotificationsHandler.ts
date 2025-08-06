@@ -2,7 +2,7 @@ import { hideElementHandler } from "@/content/handlers/hideElementHandler/hideEl
 import { bodyChangesObserver } from "@/content/handlers/others/bodyChangesObserver";
 
 export const hideNotificationsHandler = (status: boolean) => {
-    const hideNotifications = () => hideElementHandler('a[aria-label="Notifications"]',status)
+    const hideNotifications = () => hideElementHandler('a[href="/notifications"] ',status)
     hideNotifications()
     bodyChangesObserver(hideNotifications)
 };

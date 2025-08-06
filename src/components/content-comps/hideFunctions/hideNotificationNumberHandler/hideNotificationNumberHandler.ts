@@ -1,18 +1,8 @@
+import { hideElementHandler } from "@/content/handlers/hideElementHandler/hideElementHandler";
 import { bodyChangesObserver } from "@/content/handlers/others/bodyChangesObserver";
 
 export const hideNotificationNumberHandler = (status: boolean) => {
-    const hideNotificationNumber = () => {
-        const badgeSelectors = [
-            'span[data-testid="AppTabBar_Notifications_Badge"]', // Notification count badge
-            'div[aria-label*="unread items"]' // Badge container for accessibility
-        ];
-        badgeSelectors.forEach(selector => {
-            const badges = document.querySelectorAll(selector);
-            badges.forEach(badge => {
-                (badge as HTMLElement).style.display = status ? 'none' : '';
-            });
-        });
-    }
+    const hideNotificationNumber = () => hideElementHandler('a[href="/notifications"] div[aria-label$="unread items"]', status)
 
     hideNotificationNumber()
     bodyChangesObserver(hideNotificationNumber)

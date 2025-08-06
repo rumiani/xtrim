@@ -5,11 +5,11 @@ import { ExtensionActivationBtn } from '@/components/popup-comps/extensionActiva
 import { useEffect, useState } from 'react';
 import { isPageAllowedHandler } from './handlers/isPageAllowedHandler';
 import { IsPageAllowed } from '@/components/popup-comps/isPageAllowed/isPageAllowed';
-import useActivationStore from '@/stores/useActivationStore';
 import useListStore from '@/stores/useListStore';
+import useSettingsStore from '@/stores/useSettingsStore';
 
 export default function App() {
-  const { toggleIsActive } = useActivationStore();
+  const { toggleIsActive } = useSettingsStore();
   const { setListItems } = useListStore()
   const [isPageAllowed, setIsPageAllowed] = useState(false);
 

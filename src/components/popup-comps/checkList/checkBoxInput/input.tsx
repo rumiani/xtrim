@@ -1,4 +1,4 @@
-import useActivationStore from "@/stores/useActivationStore";
+import useSettingsStore from "@/stores/useSettingsStore";
 
 interface checkBoxProps {
   value: string;
@@ -12,7 +12,7 @@ export default function CheckboxInput({
   status,
   handleInputChange,
 }: checkBoxProps) {
-  const { isActive } = useActivationStore();
+  const { isActive } = useSettingsStore();
   return (
     <div className="rounded-lg transition-all duration-300">
       <div className={`flex relative ${value !== "isActive" && !isActive && 'opacity-50'}`}>

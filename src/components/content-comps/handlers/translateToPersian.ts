@@ -1,7 +1,7 @@
-export async function translateToPersian(text: string): Promise<string> {
+export async function translateToPersian(text: string,lang:string): Promise<string> {
   try {
     const response = await fetch(
-      `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=fa&dt=t&q=${encodeURIComponent(text)}`
+      `https://translate.googleapis.com/translate_a/single?client=gtx&sl=auto&tl=${lang}&dt=t&q=${encodeURIComponent(text)}`
     );
 
     if (!response.ok) throw new Error('Translation request failed');
