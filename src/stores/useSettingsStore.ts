@@ -4,7 +4,7 @@ interface Language { code: string, name: string }
 interface SettingsStore {
     isActive: boolean;
     lang: Language;
-    toggleIsActive: (status: boolean) => void;
+    toggleIsActive: () => void;
     setLanguage: (language: Language) => void;
 }
 
@@ -12,14 +12,16 @@ const useSettingsStore = create<SettingsStore>()(
     persist(
         (set) => ({
             isActive: false,
-            lang: { code: "", name: "" },
-            toggleIsActive: (status) => set({ isActive: status }),
+            lang: { code: "fa", name: "Persian" },
+            toggleIsActive: () => set((state) => ({ isActive: !state.isActive })),
             setLanguage: (lang) => set({ lang }),
         }),
         {
             name: "language",
             partialize: (state) => ({
                 lang: state.lang,
+                isActive: state.isActive,
+
             }),
         }
     )

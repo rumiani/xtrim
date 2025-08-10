@@ -4,3 +4,4 @@ export const hideElementHandler = (selector: string, status: boolean) => {
         element.style.display = status ? 'none' : '';
     }
 }
+

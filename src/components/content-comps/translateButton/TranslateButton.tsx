@@ -1,8 +1,7 @@
 import React from "react";
-import { translateToPersian } from "../handlers/translateToPersian";
-// import { SelectLangs } from "./langsSelect/langsSelect";
 import useSettingsStore from "@/stores/useSettingsStore";
 import { MdOutlineTranslate } from "react-icons/md";
+import { googleTranslateHandler } from "../handlers/googleTranslateHandler";
 
 export const TranslateButton: React.FC<{ text: string }> = ({ text }: { text: string }) => {
     const { lang } = useSettingsStore();
@@ -16,7 +15,7 @@ export const TranslateButton: React.FC<{ text: string }> = ({ text }: { text: st
         setDir(dirResult)
         setTranslating(true);
         setResult(null);
-        const result = await translateToPersian(text, lang.code);
+        const result = await googleTranslateHandler(text, lang.code);
         setResult(result);
         setTranslating(false);
     };
@@ -29,7 +28,6 @@ export const TranslateButton: React.FC<{ text: string }> = ({ text }: { text: st
                     className="w-10 h-10 rounded-full bg-gray-400 hover:bg-gray-900!">
                     {translating ? <p className="text-lg text-center">...</p> : <MdOutlineTranslate className="text-lg mx-auto" />}
                 </button>
-                {/* <SelectLangs /> */}
             </div>
             {
                 result && (

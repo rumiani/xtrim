@@ -7,24 +7,25 @@ import { translatePostHandler } from "@/components/content-comps/translatePostHa
 import { hideAdsHandler } from "@/components/content-comps/hideFunctions/hideAdsHandler/hideAdsHandler";
 import { hideNotificationsHandler } from "@/components/content-comps/hideFunctions/hideNotificationsHandler/hideNotificationsHandler";
 import { hideMessagesHandler } from "@/components/content-comps/hideFunctions/hideMessagesHandler/hideMessagesHandler";
-import { hideNotificationNumberHandler } from "@/components/content-comps/hideFunctions/hideNotificationNumberHandler/hideNotificationNumberHandler";
 import { otherThingsHnadler } from "@/components/content-comps/hideFunctions/otherThingsHandler/otherThingsHandler";
-import { hideQoutedInqoutesPageHandler } from "@/components/content-comps/hideFunctions/hideQoutedInqoutesPage/hideQoutedInqoutesPage";
 import { hideLikedNotifictationsHandler } from "@/components/content-comps/hideFunctions/hideLikedNotifictationsHandler/hideLikedNotifictationsHandler";
 import { hideGrokHandler } from "@/components/content-comps/hideFunctions/hideGrokHandler/hideGrokHandler";
 import { hidePremiumHandler } from "@/components/content-comps/hideFunctions/hidePremiumHandler/hidePremiumHandler";
 import { hideSearchHandler } from "@/components/content-comps/hideFunctions/hideSearchHandler/hideSearchHandler";
 import { hideTweetEngagementHandler } from "@/components/content-comps/hideFunctions/hideTweetEngagementHandler/hideTweetEngagementHandler";
-import { FeatureListTypes } from "@/stores/useListStore";
-import { list } from "@/assets/lists/featuresList";
+import { Feature, list } from "@/assets/lists/featuresList";
 import { profileNoteHandler } from "@/components/content-comps/accountNoteHandler/accountNoteHandler";
+import { blockButtonHandler } from "@/components/content-comps/blockButtonHandler/blockButtonHandler";
+import { hideNotificationBlueBadgeHandler } from "@/components/content-comps/hideFunctions/hideNotificationBlueBadgeHandler/hideNotificationBlueBadgeHandler";
+import { hideQuotedInquotesPageHandler } from "@/components/content-comps/hideFunctions/hideQuotedInquotesPageHandler/hideQuotedInquotesPageHandler";
 
 type FeatureValue = typeof list[number]['value']
 
 type FeatureValueHandlers = Record<FeatureValue, (status: boolean) => void>;
 
 
-export const runTheListObjectFunction = (object: FeatureListTypes) => {
+
+export const runTheListObjectFunction = (object: Feature) => {    
     const functionsObject: FeatureValueHandlers = {
         translate_button: (status: boolean) => {
             translatePostHandler(status)
@@ -32,10 +33,10 @@ export const runTheListObjectFunction = (object: FeatureListTypes) => {
         profile_note: (status) => {
             profileNoteHandler(status)
         },
-        delete_button_for_your_posts: (status: boolean) => {
+        quick_post_deletion: (status: boolean) => {
             deleteButtonHandler(status)
         },
-        remove_post_ads: (status: boolean) => {
+        hide_post_ads: (status: boolean) => {
             hideAdsHandler(status)
         },
         hide_title_notification: (status: boolean) => {
@@ -44,8 +45,8 @@ export const runTheListObjectFunction = (object: FeatureListTypes) => {
         hide_notifications: (status: boolean) => {
             hideNotificationsHandler(status)
         },
-        hide_notifications_number: (status: boolean) => {
-            hideNotificationNumberHandler(status)
+        hide_notifications_blue_badge: (status: boolean) => {
+            hideNotificationBlueBadgeHandler(status)
         },
         hide_liked_notifications: (status: boolean) => {
             hideLikedNotifictationsHandler(status)
@@ -66,11 +67,11 @@ export const runTheListObjectFunction = (object: FeatureListTypes) => {
         hide_new_posts_notification: (status: boolean) => {
             hideNewPostsNotificationHandler(status)
         },
-        other_things: (status: boolean) => {
+        hide_trending: (status: boolean) => {
             otherThingsHnadler(status)
         },
-        hide_qouted_inqoutes_page: (status: boolean) => {
-            hideQoutedInqoutesPageHandler(status)
+        hide_quoted_in_quotes_page: (status: boolean) => {
+            hideQuotedInquotesPageHandler(status)
         },
 
         hide_grok: (status: boolean) => {
@@ -81,6 +82,9 @@ export const runTheListObjectFunction = (object: FeatureListTypes) => {
         },
         hide_tweet_engagement: (status: boolean) => {
             hideTweetEngagementHandler(status)
+        },
+        block_button: (status: boolean) => {
+            blockButtonHandler(status)
         }
     }
 

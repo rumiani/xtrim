@@ -1,27 +1,30 @@
-import { MinimalInterface } from "./minimalInterface/minimalInterface"
-import { AddTools } from "./addTools/addTools"
-import useListStore from "@/stores/useListStore"
+import useListStore from "@/stores/useListStore";
+import { useMemo } from "react";
+import { Feature } from "@/assets/lists/featuresList";
+import { HideSection } from "./HideSection/HideSection";
 
 export const CheckList = () => {
-    const { list,setListItems } = useListStore();
-
-
-    const handleInputChange = async (value: string) => {
-        const item = list!.find((item: any) => item.value === value)!;
-        item.status = !item.status
-        setListItems([...list]) // Re-render the component
-
-        try {
-            await chrome.storage.local.set({ list: list })
-        } catch (error) {
-            console.error('Error saving to storage:', error)
+    const { list } = useListStore();
+    const categorizedItems = useMemo(() => {
+        const result = {
+            tool: [] as Feature[],
+            hideFeed: [] as Feature[],
+            hideNotification: [] as Feature[],
+            hideNavbar: [] as Feature[],
+            hideMisc: [] as Feature[],
+        };
+        for (const item of list) {
+            if (result[item.category]) result[item.category].push(item);
         }
-    }
+        return result;
+    }, [list]);
 
     return (
         <div className="h-72 custom-scrollbar">
-            <AddTools handleInputChange={handleInputChange} />
-            <MinimalInterface handleInputChange={handleInputChange} />
+            <HideSection categoryList={categorizedItems.tool} />
+            <HideSection categoryList={categorizedItems.hideFeed} />
+            <HideSection categoryList={categorizedItems.hideNotification} />
+            <HideSection categoryList={categorizedItems.hideMisc} />
         </div>
     )
 }

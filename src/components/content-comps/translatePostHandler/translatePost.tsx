@@ -1,8 +1,6 @@
 import ReactDOM from 'react-dom/client';
 import { TranslateButton } from '../translateButton/TranslateButton';
-// import { optionPermisionHandler } from '@/content/handlers/others/optionPermisionHandler';
 import { bodyChangesObserver } from '@/content/handlers/others/bodyChangesObserver';
-import { isPersian } from '../handlers/isPersian';
 
 
 // Main function to observe posts and inject buttons
@@ -23,7 +21,7 @@ export const translatePostHandler = async (status: boolean) => {
                 .join(' ')
                 .trim();
 
-            if (!rawText || isPersian(rawText)) return;
+            if (!rawText) return;
             // --- Container for React component ---
             const container = document.createElement('div');
             container.className = 'translate-btn-container';

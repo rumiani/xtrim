@@ -1,6 +1,6 @@
 import { bodyChangesObserver } from "@/content/handlers/others/bodyChangesObserver";
 
-export const hideQoutedInqoutesPageHandler = (status: boolean) => {
+export const hideQuotedInquotesPageHandler = (status: boolean) => {
     const hideQoutedInqoutesPage = () => {
         const isQuotesPage = window.location.href.endsWith('/quotes');
         if (!isQuotesPage) return;

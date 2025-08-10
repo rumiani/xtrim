@@ -1,25 +1,24 @@
 import { runTheListObjectFunction } from "@/content/handlers/runTheListObjectFunction";
 import { theDifferentObjetHandler } from "./others/theDifferentObjetHandler";
-import { FeatureListTypes } from "@/stores/useListStore";
+import { Feature } from "@/assets/lists/featuresList";
 
 export const storageChangeListener = () => {
     const handleStorageChange = (changes: any, namespace: string) => {
         if (namespace === 'local' && changes.list) {
             const { newValue, oldValue } = changes.list
-            const changedObject: FeatureListTypes | undefined = theDifferentObjetHandler(newValue, oldValue)
+            const changedObject: Feature | undefined = theDifferentObjetHandler(newValue, oldValue)
             if (changedObject) runTheListObjectFunction(changedObject)
         } else if (namespace === 'local' && changes.isActive) {
-            const { newValue } = changes.isActive            
-            if (newValue) 
+            const { newValue } = changes.isActive
+            if (newValue)
                 loadInitialList()
         }
     }
-
     const loadInitialList = async () => {
         try {
             const result = await chrome.storage.local.get(['list'])
             if (result.list !== undefined) {
-                result.list.forEach((object: FeatureListTypes) => {
+                result.list.forEach((object: Feature) => {                    
                     runTheListObjectFunction(object)
                 })
             }

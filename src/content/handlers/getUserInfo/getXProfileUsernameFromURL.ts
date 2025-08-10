@@ -1,4 +1,4 @@
-export function getXProfileUsername() {
+export function getXProfileUsernameFromURL() {
   const url = window.location.href.replace(/\/$/, '');
   const profileRegex = /^https?:\/\/(www\.)?x\.com\/([A-Za-z0-9_]{1,15})$/;  
   const match = url.match(profileRegex);

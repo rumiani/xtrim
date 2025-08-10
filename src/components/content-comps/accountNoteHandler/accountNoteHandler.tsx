@@ -1,33 +1,34 @@
 import ReactDOM from 'react-dom/client';
-import { bodyChangesObserver } from '@/content/handlers/others/bodyChangesObserver';
+// import { bodyChangesObserver } from '@/content/handlers/others/bodyChangesObserver';
 import NoteContainer from './noteContainer/noteContainer';
-import { getXProfileUsername } from '@/content/handlers/getUserInfo/getXProfileUsername';
+import { bodyChangesObserver } from '@/content/handlers/others/bodyChangesObserver';
+import { getXProfileUsernameFromURL } from '@/content/handlers/getUserInfo/getXProfileUsernameFromURL';
 
 export const profileNoteHandler = (status: boolean) => {
-    if (!status) return
 
     const profileNote = () => {
-        const foundUsername = getXProfileUsername()
-        if (!foundUsername) return
-        // Find the profile page's main navigation bar
-        const navBar = document.querySelector('nav[aria-label="Profile timelines"]');
-        // Proceed only if the nav bar exists and our element isn't already there
-        if (navBar && !document.getElementById("noteContainer")) {
+        const foundUsername = getXProfileUsernameFromURL()
+        const isOnProfile = document.querySelector('nav[aria-label="Profile timelines"]');
+        const noteContainer = document.getElementById("noteContainer")
+        if (!foundUsername || !isOnProfile) return
 
-            (navBar as HTMLDivElement).style.cssText = 'width:100%; display: flex !important; flex-direction: column !important;';
-
+        if (!status && noteContainer) {
+            console.log("No ...........");
+            return noteContainer.remove()
+        }
+        if (status && !noteContainer) {
+            console.log('ceate .........',status);
+            
+            (isOnProfile as HTMLDivElement).style.cssText = 'width:100%; display: flex !important; flex-direction: column !important;';
             const customDiv = document.createElement('div');
             customDiv.id = "noteContainer";
-            customDiv.style.cssText = "width:100%; background:white; padding:2px;"
-            navBar.prepend(customDiv);
+            customDiv.style.cssText = "width:100%; background:white; padding:2px;";
+            (isOnProfile as HTMLDivElement).prepend(customDiv);
             const root = ReactDOM.createRoot(customDiv);
             root.render(<NoteContainer />);
 
         }
-        // 3. Add a class to the nav element to apply our custom layout
     }
     profileNote()
     bodyChangesObserver(profileNote)
-
-
 };

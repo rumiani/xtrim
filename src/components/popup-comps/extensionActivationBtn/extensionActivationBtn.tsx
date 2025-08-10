@@ -1,29 +1,21 @@
-import CheckboxInput from "../checkList/checkBoxInput/input"
-import { refreshHandler } from "@/popup/handlers/refreshHandler";
-import useListStore from "@/stores/useListStore";
 import useSettingsStore from "@/stores/useSettingsStore";
+import SwitchInput from "../checkList/SwitchInput/SwitchInput";
+import { Feature } from "@/assets/lists/featuresList";
 
 export const ExtensionActivationBtn = () => {
-    const { isActive, toggleIsActive } = useSettingsStore();
-    const { setAllListItemStatus } = useListStore();
-
-
-    const inputChangeHandler = async () => {
-        try {
-            const newStatus = !isActive
-            toggleIsActive(newStatus)
-            await chrome.storage.local.set({ isActive: newStatus })
-            refreshHandler()
-            setAllListItemStatus(newStatus)
-        } catch (error) {
-            console.error('Error saving to storage:', error)
-        }
+    const { isActive } = useSettingsStore();
+    const item: Feature = {
+        value: "isActive",
+        title: "Extension Activation",
+        category: "hideMisc",
+        description: "",
+        label: "Activate the extension",
+        status: isActive
     }
-
     return (
         <div>
             <div className="p-2 mx-2 text-lg flex flex-row justify-between border-b border-gray-400 " >
-                <CheckboxInput value="isActive" label="Activate the extension" status={isActive} handleInputChange={() => inputChangeHandler()} />
+                <SwitchInput item={item} />
             </div>
         </div>
     )

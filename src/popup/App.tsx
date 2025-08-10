@@ -6,40 +6,25 @@ import { useEffect, useState } from 'react';
 import { isPageAllowedHandler } from './handlers/isPageAllowedHandler';
 import { IsPageAllowed } from '@/components/popup-comps/isPageAllowed/isPageAllowed';
 import useListStore from '@/stores/useListStore';
-import useSettingsStore from '@/stores/useSettingsStore';
 
 export default function App() {
-  const { toggleIsActive } = useSettingsStore();
-  const { setListItems } = useListStore()
-  const [isPageAllowed, setIsPageAllowed] = useState(false);
+
+  const { loadListFromStorage } = useListStore()
+  const [isPageAllowed, setIsPageAllowed] = useState(true);
 
   useEffect(() => {
     (async () => setIsPageAllowed(await isPageAllowedHandler()))();
-
-    const loadDataFromChromeStorage = async () => {
-      try {
-        const activationResult = await chrome.storage.local.get(['isActive'])
-        toggleIsActive(activationResult.isActive)
-        const listItemsResult = await chrome.storage.local.get(['list'])
-        setListItems(listItemsResult.list)
-      } catch (error) {
-        console.error('Error loading settings:', error)
-      }
-    }
-    loadDataFromChromeStorage()
-
+    loadListFromStorage()
   }, [])
 
-  if (!isPageAllowed) return <IsPageAllowed />
+  if(!isPageAllowed) return <IsPageAllowed />
   return (
-    <>
-      <div className="w-96 h-96 bg-gray-200">
+      <div className="w-96 h-96 bg-gradient-to-r from-black to-gray-800 text-white">
         <ExtensionActivationBtn />
         <CheckList />
         <div className='fixed w-full bottom-0'>
           <DevelopingInfo />
         </div>
       </div>
-    </>
   )
 }

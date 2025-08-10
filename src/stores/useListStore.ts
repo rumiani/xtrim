@@ -1,37 +1,39 @@
-import { list } from '@/assets/lists/featuresList';
+import { Feature, list as fallbackList } from '@/assets/lists/featuresList';
 import { create } from 'zustand';
 
-export interface FeatureListTypes {
-    category: 'tools' | 'hideElements';
-    label: string;
-    value: string;
-    status: boolean;
-    description: string;
-}
-
 export interface ListStore {
-    list: FeatureListTypes[];
-    setListItems: (items: FeatureListTypes[]) => void;
-    setListItemStatus: (itemValue: string, status: boolean) => void;
+    list: Feature[];
+    loadListFromStorage: () => void;
+    setListItemStatus: (itemValue: string) => void;
     setAllListItemStatus: (status: boolean) => void;
 }
 
 const useListStore = create<ListStore>((set, get) => ({
-    list: [...list] as FeatureListTypes[],
-    setListItems: (items) => set({ list: items }),
-    setListItemStatus: (itemValue, status) =>
-        set((state) => ({
-            list: state.list.map((item) =>
-                item.value === itemValue ? { ...item, status } : item
-            ),
-        })),
-    setAllListItemStatus: (status) => {
+    list: [...fallbackList],
+    loadListFromStorage: async () => {
+        const result = await chrome.storage.local.get(['list']);
+        if (result.list && Array.isArray(result.list) && result.list.length > 0) {
+            set({ list: result.list });
+        } else {
+            set(state => ({ list: state.list }));
+            await chrome.storage.local.set({ list: result });
+        }
+    },
+    setListItemStatus: async (itemValue) => {
+        const updatedList = get().list.find((item) => item.value === itemValue);
+        updatedList!.status = !updatedList!.status;
+        set((state) => {
+            chrome.storage.local.set({ list: state.list });
+            return ({ list: [...state.list] })
+        });
+    },
+    setAllListItemStatus: async (status) => {
         const updatedList = get().list.map((item) => ({
             ...item,
-            status,
+            status: !status
         }));
         set({ list: updatedList });
-        chrome.storage.local.set({ list: updatedList });
+        await chrome.storage.local.set({ list: updatedList });
     },
 }));
 

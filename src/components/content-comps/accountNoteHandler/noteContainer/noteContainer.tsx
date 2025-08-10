@@ -1,8 +1,8 @@
 "use client"
 import { useEffect, useRef, useState } from "react";
 import { getUserFromStorage, saveUserNoteToStorage } from "./localStorageHandler";
-import { getXProfileUsername } from "@/content/handlers/getUserInfo/getXProfileUsername";
 import { RiEditLine, RiSaveLine } from "react-icons/ri";
+import { getXProfileUsernameFromURL } from "@/content/handlers/getUserInfo/getXProfileUsernameFromURL";
 
 export default function NoteContainer() {
   const [username, setUsername] = useState<string>();
@@ -13,8 +13,7 @@ export default function NoteContainer() {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
-    const foundUsername = getXProfileUsername()
-    console.log(foundUsername);
+    const foundUsername = getXProfileUsernameFromURL()
     if (foundUsername) {
       setUsername(foundUsername);
       const userObject = getUserFromStorage(foundUsername);

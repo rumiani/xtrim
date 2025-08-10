@@ -1,40 +1,36 @@
 import { getUserInfo } from "@/content/handlers/getUserInfo/getUserInfo";
 import { bodyChangesObserver } from "@/content/handlers/others/bodyChangesObserver";
 
-export const deleteButtonHandler = (status: boolean) => {
-    // Function to check if user info is loaded and add delete buttons
-    function checkUserAndAddButtons() {
-        const user = getUserInfo();
-        if (!user?.username) return; // Exit if user info isn't ready yet
+export const blockButtonHandler = (status: boolean) => {
 
-        function addDeleteButtons() {
+    function checkUserAndAddButtons() {
+        const isOnProfile = document.querySelector('nav[aria-label="Profile timelines"]');
+        if (isOnProfile) return
+
+        function addblockButtons() {
             if (!status)
-                return document.querySelectorAll('.custom-delete-button').forEach(container => container.remove())
+                return document.querySelectorAll('.custom-block-button').forEach(container => container.remove())
 
             const posts = document.querySelectorAll('article[role="article"]') as NodeListOf<HTMLElement>;
             posts.forEach((post) => {
-                if (post.querySelector('.custom-delete-button')) return;
-
-                const usernameLink = post.querySelector(`a[href="/${user!.username}"]`);
-                const isRepost = post.querySelector('svg[data-testid="icon-retweet"]') || post.textContent?.includes('You reposted');
-                if (!usernameLink || isRepost) return;
+                if (post.querySelector('.custom-block-button')) return;
 
                 const actionBar = post.querySelector('div[role="group"]');
                 if (!actionBar) return;
 
-                const deleteButton = document.createElement('button');
-                deleteButton.className = 'custom-delete-button';
-                deleteButton.textContent = 'Delete';
-                deleteButton.style.cssText = 'margin-left: 10px; color: red; cursor: pointer; background: none; border: none; font-size: 14px;';
+                const blockButton = document.createElement('button');
+                blockButton.className = 'custom-block-button';
+                blockButton.textContent = 'Block';
+                blockButton.style.cssText = 'margin-left: 10px; color: red; cursor: pointer; background: none; border: none; font-size: 14px;';
 
-                actionBar.appendChild(deleteButton);
+                actionBar.appendChild(blockButton);
 
-                deleteButton.addEventListener('click', () => automateDelete(post));
+                blockButton.addEventListener('click', () => automateBlock(post));
             });
         }
 
-        addDeleteButtons();
-        bodyChangesObserver(addDeleteButtons);
+        addblockButtons();
+        bodyChangesObserver(addblockButtons);
     }
 
     // Use MutationObserver to wait for user info element (adjust selector based on getUserInfo() source)
@@ -53,16 +49,16 @@ export const deleteButtonHandler = (status: boolean) => {
     checkUserAndAddButtons();
 };
 
-function automateDelete(post: HTMLElement) {
+function automateBlock(post: HTMLElement) {
     const moreButton = post.querySelector('button[aria-haspopup="menu"]') as HTMLElement | null;
     if (!moreButton) return;
     moreButton.click();
 
     const menuObserver = new MutationObserver((mutations, observer) => {
-        const deleteMenuItem = document.querySelector('div[role="menuitem"][tabindex="0"] span');
-        if (deleteMenuItem && deleteMenuItem.textContent!.trim() === 'Delete') {
-            (deleteMenuItem as HTMLElement).click();
-            console.log("deleteMenuItem:", mutations);
+        const blockMenuItem = document.querySelector('div[data-testid="block"]');
+        if (blockMenuItem) {
+            (blockMenuItem as HTMLElement).click();
+            console.log("blockMenuItem:", mutations);
 
             const confirmObserver = new MutationObserver((_, confirmObserver) => {
                 const confirmButton = document.querySelector('button[data-testid="confirmationSheetConfirm"]') as HTMLElement | null;
