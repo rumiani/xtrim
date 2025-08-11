@@ -3,3 +3,6 @@
 .profileTextArea::placeholder {
     opacity: 0.5;
 }
+.profileTextArea{
+    padding-right: 35px;
+}

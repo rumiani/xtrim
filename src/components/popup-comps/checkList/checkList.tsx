@@ -25,6 +25,8 @@ export const CheckList = () => {
             <HideSection categoryList={categorizedItems.hideFeed} />
             <HideSection categoryList={categorizedItems.hideNotification} />
             <HideSection categoryList={categorizedItems.hideMisc} />
+            <HideSection categoryList={categorizedItems.hideNavbar} />
+
         </div>
     )
 }

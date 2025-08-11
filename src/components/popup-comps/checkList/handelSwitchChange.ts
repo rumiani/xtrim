@@ -1,18 +1,17 @@
 import { Feature } from "@/assets/lists/featuresList";
 import { runTheListObjectFunction } from "@/content/handlers/runTheListObjectFunction";
 import { refreshHandler } from "@/popup/handlers/refreshHandler";
+import useSettingStore from "@/stores/settingStore";
 import useListStore from "@/stores/useListStore";
-import useSettingsStore from "@/stores/useSettingsStore";
 
-export const handleSwitchChange = async (item:Feature): Promise<void> => {
-    const{ value } = item
+export const handleSwitchChange = async (item: Feature): Promise<void> => {
+    const { value, status } = item
     try {
         const { setAllListItemStatus, setListItemStatus } = useListStore.getState();
-
+        
         if (value === "isActive") {
-            const { isActive, toggleIsActive } = useSettingsStore.getState();
-            toggleIsActive()
-            setAllListItemStatus(isActive)
+            useSettingStore.getState().setIsActive(status)
+            setAllListItemStatus(status)
             refreshHandler()
             return
         } else {

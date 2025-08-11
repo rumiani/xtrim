@@ -3,32 +3,33 @@ import {
     SelectContent,
     SelectGroup,
     SelectItem,
-    // SelectLabel,
     SelectTrigger,
     SelectValue,
 } from "@/components/ui/select"
 import { languages } from "./langs"
-import useSettingsStore from "@/stores/useSettingsStore";
 import useListStore from "@/stores/useListStore";
+import useSettingStore from "@/stores/settingStore";
 
 export function SelectLangs() {
-    const { lang, setLanguage, isActive } = useSettingsStore();
     const { list } = useListStore();
-    const isTranslateOn: boolean | undefined = list.find((item) => item.value === "translate_button")?.status
+    const { isActive, lang, setLang } = useSettingStore()
 
+    const isTranslateOn: boolean | undefined = list.find((item) => item.value === "translate_button")?.status
 
     return (
         <Select
             disabled={!isTranslateOn}
-            onValueChange={(value) => {
+            onValueChange={async (value) => {
                 const selectedLang = languages.find((lang) => lang.code === value);
-                if (selectedLang) setLanguage(selectedLang)
+                if (selectedLang) setLang(selectedLang)
+
             }}
+            value={lang.code}
         >
             <SelectTrigger
-            className="relative group w-fit pl-4! justify-center bg-gray-900! text-white rounded-xl">
-            {isActive && !isTranslateOn && <span className="absolute invisible -left-10 group-hover:visible">{"<-----"}</span>}
-                <SelectValue placeholder={lang.name} defaultValue={lang.code} className="text-white!" />
+                className="relative group w-fit pl-4! justify-center bg-gray-900! text-white rounded-xl">
+                {isActive && !isTranslateOn && <span className="absolute invisible -left-10 group-hover:visible">{"<-----"}</span>}
+                <SelectValue className="text-white!" />
             </SelectTrigger>
             <SelectContent className="w-48 bg-gray-900!">
                 <SelectGroup>

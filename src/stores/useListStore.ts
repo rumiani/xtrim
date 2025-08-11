@@ -1,4 +1,5 @@
 import { Feature, list as fallbackList } from '@/assets/lists/featuresList';
+import { chromStorageHandler } from '@/handlers/chromStorageHandler';
 import { create } from 'zustand';
 
 export interface ListStore {
@@ -8,32 +9,32 @@ export interface ListStore {
     setAllListItemStatus: (status: boolean) => void;
 }
 
-const useListStore = create<ListStore>((set, get) => ({
+const useListStore = create<ListStore>((set) => ({
     list: [...fallbackList],
     loadListFromStorage: async () => {
-        const result = await chrome.storage.local.get(['list']);
-        if (result.list && Array.isArray(result.list) && result.list.length > 0) {
-            set({ list: result.list });
+        const list = await chromStorageHandler.get('list') as Feature[];
+        if (list && Array.isArray(list) && list.length > 0) {
+            set({ list: list });
         } else {
             set(state => ({ list: state.list }));
-            await chrome.storage.local.set({ list: result });
+            await chromStorageHandler.set("list", list);
         }
     },
     setListItemStatus: async (itemValue) => {
-        const updatedList = get().list.find((item) => item.value === itemValue);
-        updatedList!.status = !updatedList!.status;
-        set((state) => {
-            chrome.storage.local.set({ list: state.list });
-            return ({ list: [...state.list] })
-        });
+        const list = await chromStorageHandler.get('list') as Feature[];
+        const listItem = list.find((item) => item.value === itemValue);
+        listItem!.status = !listItem!.status;
+        chromStorageHandler.set("list", list);
+        set({list})
     },
     setAllListItemStatus: async (status) => {
-        const updatedList = get().list.map((item) => ({
+        const list = await chromStorageHandler.get('list') as Feature[];
+        const updatedList = list.map((item) => ({
             ...item,
-            status: !status
+            status
         }));
         set({ list: updatedList });
-        await chrome.storage.local.set({ list: updatedList });
+        await chromStorageHandler.set("list", updatedList);
     },
 }));
 

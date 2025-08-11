@@ -1,22 +1,18 @@
 import { list } from "./assets/lists/featuresList";
+import { settings } from "./assets/lists/settings";
+import { chromStorageHandler } from "./handlers/chromStorageHandler";
 
-console.log('background');
-// This runs immediately when extension is installed
 chrome.runtime.onInstalled.addListener(async (details) => {
-    console.log("hi - Extension installed!")
     console.log("Install reason:", details.reason) // 'install', 'update', 'chrome_update', etc.
-
     if (details.reason === 'install') {
-        console.log("Extension was installed!")
         try {
-            await chrome.storage.local.set({ list })
-            await chrome.storage.local.set({ isActive: false })
+            await chromStorageHandler.set("list", list)
+            await chromStorageHandler.set("settings", settings)
         } catch {
             console.error('Error saving to storage:')
         }
 
-        // Example: Set default storage values
-        chrome.storage.local.set({
+        await chromStorageHandler.set("defaultStorageValues", {
             firstInstall: true,
             installDate: Date.now(),
             version: chrome.runtime.getManifest().version

@@ -1,16 +1,16 @@
 import React from "react";
-import useSettingsStore from "@/stores/useSettingsStore";
 import { MdOutlineTranslate } from "react-icons/md";
 import { googleTranslateHandler } from "../handlers/googleTranslateHandler";
+import { chromStorageHandler } from "@/handlers/chromStorageHandler";
+import { SettingsTypes } from "@/assets/lists/settings";
 
 export const TranslateButton: React.FC<{ text: string }> = ({ text }: { text: string }) => {
-    const { lang } = useSettingsStore();
     const [translating, setTranslating] = React.useState(false);
     const [result, setResult] = React.useState<string | null>(null);
     const [dir, setDir] = React.useState<string>();
 
-
     const handleTranslate = async () => {
+        const { lang } = await chromStorageHandler.get('settings') as SettingsTypes;
         const dirResult = ['fa', 'ar', 'he', 'ur'].includes(lang.code) ? 'rtl' : 'ltr';
         setDir(dirResult)
         setTranslating(true);

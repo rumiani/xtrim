@@ -19,7 +19,6 @@ export default function NoteContainer() {
       const userObject = getUserFromStorage(foundUsername);
       if (userObject) setNote(userObject.note);
     }
-
   }, []);
 
   const saveNoteHandler = () => {
@@ -36,21 +35,20 @@ export default function NoteContainer() {
     setTimeout(() => {
       if (textareaRef.current) {
         textareaRef.current.focus();
-        autoResize(textareaRef.current);
+        autoResize();
       }
     }, 0);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setNote(e.target.value);
-    autoResize(e.target);
+  const handleChange = () => {
+    setNote(textareaRef.current!.value);
+    autoResize();
   };
 
-  const autoResize = (textarea: HTMLTextAreaElement) => {
-    textarea.style.height = 'auto'; // reset
-    textarea.style.height = `${textarea.scrollHeight}px`; // adjust
+  const autoResize = () => {
+    textareaRef.current!.style.height = 'auto'; // reset
+    textareaRef.current!.style.height = `${textareaRef.current!.scrollHeight}px`; // adjust
   };
-
   return (
     <div className="relative w-full flex flex-row gap-2 min-h-10">
       <textarea
@@ -59,27 +57,26 @@ export default function NoteContainer() {
         value={note}
         placeholder="Write something about this account ..."
         onChange={handleChange}
-        className={`${editing ? "bg-yellow-200" : ""} profileTextArea w-full min-h-[2.5rem] overflow-hidden text-black! p-1 outline-none`}
+        className={`${editing ? "bg-yellow-200" : ""} profileTextArea w-full min-h-[2.5rem] overflow-hidden text-black! outline-none`}
         dir="auto"
-        rows={2}
         style={{
           lineHeight: '1.5rem',
           resize: "none",
           cursor: editing ? "text" : "default",
-          
+
         }}
       />
-      <button className="absolute w-12 right-0 -top-7">
+      <button className="absolute w-12 right-0 top-0">
         {editing ? (
-          <RiSaveLine onClick={saveNoteHandler} title="Save" className="text-2xl w-full text-gray-500 flex justify-center items-center"/>
+          <RiSaveLine onClick={saveNoteHandler} title="Save" className="text-2xl w-full text-gray-500 flex justify-center items-center" />
         ) : saved ? (
           <RiEditLine
             onClick={editNoteHandler} title="Edit" className="text-2xl w-full text-yellow-400 flex justify-center items-center"
           />
-      ) : (
-      <span className="w-full text-green-500 flex justify-center items-center">Saved</span>
+        ) : (
+          <span className="w-full text-green-500 flex justify-center items-center">Saved</span>
         )}
-    </button>
+      </button>
     </div >
   );
 }

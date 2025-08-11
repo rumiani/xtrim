@@ -2,6 +2,7 @@ import { hideElementHandler } from "@/content/handlers/hideElementHandler/hideEl
 import { bodyChangesObserver } from "@/content/handlers/others/bodyChangesObserver";
 // import { bodyChangesObserver } from "@/content/handlers/others/bodyChangesObserver";
 
+
 export const hideSearchHandler = (status: boolean) => {
     const hideSearch = () => {
         hideElementHandler('form[aria-label="Search"]', status)

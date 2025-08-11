@@ -1,9 +1,12 @@
 import { runTheListObjectFunction } from "@/content/handlers/runTheListObjectFunction";
 import { theDifferentObjetHandler } from "./others/theDifferentObjetHandler";
 import { Feature } from "@/assets/lists/featuresList";
+import { chromStorageHandler } from "@/handlers/chromStorageHandler";
+import { SettingsTypes } from "@/assets/lists/settings";
+import useSettingStore from "@/stores/settingStore";
 
 export const storageChangeListener = () => {
-    const handleStorageChange = (changes: any, namespace: string) => {
+    const handleStorageChange = (changes: any, namespace: string) => {           
         if (namespace === 'local' && changes.list) {
             const { newValue, oldValue } = changes.list
             const changedObject: Feature | undefined = theDifferentObjetHandler(newValue, oldValue)
@@ -16,18 +19,18 @@ export const storageChangeListener = () => {
     }
     const loadInitialList = async () => {
         try {
-            const result = await chrome.storage.local.get(['list'])
-            if (result.list !== undefined) {
-                result.list.forEach((object: Feature) => {                    
-                    runTheListObjectFunction(object)
-                })
+            const list = await chromStorageHandler.get('list') as Feature[]            
+            if (list !== undefined)
+                list.forEach((object: Feature) => runTheListObjectFunction(object))
+            const settings = await chromStorageHandler.get('settings') as SettingsTypes
+            if (settings !== undefined) {
+                useSettingStore.getState().setIsActive(settings.isActive)
             }
         } catch (error) {
             console.error('Error loading initial list:', error)
         }
     }
     loadInitialList()
-
 
     chrome.storage.onChanged.addListener(handleStorageChange);
     window.addEventListener("beforeunload", () => {

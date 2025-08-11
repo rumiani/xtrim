@@ -1,19 +1,23 @@
 import { Label } from "@/components/ui/label"
 import { Switch } from "@/components/ui/switch"
-import useSettingsStore from "@/stores/useSettingsStore";
 import { handleSwitchChange } from "../handelSwitchChange";
 import { Feature } from "@/assets/lists/featuresList";
+// import { useEffect, useState } from "react";
+// import { SettingsTypes } from "@/assets/lists/settings";
+// import { chromStorageHandler } from "@/handlers/chromStorageHandler";
+import useSettingStore from "@/stores/settingStore";
 
 export default function SwitchInput({ item }: { item: Feature }) {
   const { value, status, label } = item;
+  const { isActive } = useSettingStore.getState()
 
-  const { isActive } = useSettingsStore();
+
   return (
     <div className={`flex flex-col gap-2 relative ${value !== "isActive" && !isActive && 'opacity-50'} rounded-lg transition-all duration-300`}>
       <div className="flex items-center gap-2 my-1">
         <Switch
           checked={status}
-          onClick={() => handleSwitchChange(item)}
+          onClick={() => handleSwitchChange({ ...item, status: !status })}
           id={value}
           name={value}
           disabled={value === "isActive" ? false : !isActive}
